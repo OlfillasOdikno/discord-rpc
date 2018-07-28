@@ -77,11 +77,11 @@ static void Discord_RegisterW(const wchar_t* applicationId, const wchar_t* comma
     wchar_t openCommand[1024];
 
     if (command && command[0]) {
-        StringCbPrintfW(openCommand, sizeof(openCommand), L"%s", command);
+        StringCbPrintfW(openCommand, sizeof(openCommand), L"%s \"%%1\"", command);
     }
     else {
         // StringCbCopyW(openCommand, sizeof(openCommand), exeFilePath);
-        StringCbPrintfW(openCommand, sizeof(openCommand), L"%s", exeFilePath);
+        StringCbPrintfW(openCommand, sizeof(openCommand), L"\"%s\" \"%%1\"", exeFilePath);
     }
 
     wchar_t protocolName[64];
