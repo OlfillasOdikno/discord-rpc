@@ -31,14 +31,18 @@ extern "C" DISCORD_EXPORT void Discord_Register(const char* applicationId, const
         return;
     }
 
-    char exePath[1024];
-    if (!command || !command[0]) {
+    char openCommand[1024];
+    if (command && command[0]) {
+        snprintf(openCommand, sizeof(openCommand), "%s", command);
+    }
+    else {
+        char exePath[1024];
         ssize_t size = readlink("/proc/self/exe", exePath, sizeof(exePath));
         if (size <= 0 || size >= sizeof(exePath)) {
             return;
         }
         exePath[size] = '\0';
-        command = exePath;
+        snprintf(openCommand, sizeof(openCommand), "\"%s\"", exePath);
     }
 
     const char* destopFileFormat = "[Desktop Entry]\n"
@@ -50,7 +54,7 @@ extern "C" DISCORD_EXPORT void Discord_Register(const char* applicationId, const
                                    "MimeType=x-scheme-handler/discord-%s;\n";
     char desktopFile[2048];
     int fileLen = snprintf(
-      desktopFile, sizeof(desktopFile), destopFileFormat, applicationId, command, applicationId);
+      desktopFile, sizeof(desktopFile), destopFileFormat, applicationId, openCommand, applicationId);
     if (fileLen <= 0) {
         return;
     }
