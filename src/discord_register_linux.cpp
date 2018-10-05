@@ -53,8 +53,12 @@ extern "C" DISCORD_EXPORT void Discord_Register(const char* applicationId, const
                                    "Categories=Discord;Games;\n"
                                    "MimeType=x-scheme-handler/discord-%s;\n";
     char desktopFile[2048];
-    int fileLen = snprintf(
-      desktopFile, sizeof(desktopFile), destopFileFormat, applicationId, openCommand, applicationId);
+    int fileLen = snprintf(desktopFile,
+                           sizeof(desktopFile),
+                           destopFileFormat,
+                           applicationId,
+                           openCommand,
+                           applicationId);
     if (fileLen <= 0) {
         return;
     }

@@ -19,7 +19,7 @@
  * 2) RegSetKeyValueW and LSTATUS are not declared in <winreg.h>
  * The entire function is rewritten
  */
-#if 0 //def __MINGW32__
+#if 0 // def __MINGW32__
 /// strsafe.h fixes
 static HRESULT StringCbPrintfW(LPWSTR pszDest, size_t cbDest, LPCWSTR pszFormat, ...)
 {
